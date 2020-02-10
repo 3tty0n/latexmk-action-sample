@@ -1,0 +1,19 @@
+name: Testing My GitHub Actions
+on: [push, pull_request]
+jobs:
+  compile_latex:
+    runs-on: ubuntu-latest
+    name: A job to compile a LaTeX document
+    steps:
+      # To use this repository's private action, you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Compiling
+        uses: 3tty0n/latexmk-action@v2
+        with:
+          root_file: main.tex
+          args: -pdfxe
+      - uses: actions/upload-artifact@v1
+        with:
+          name: main.pdf
+          path: main.pdf
